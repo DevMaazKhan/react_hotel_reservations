@@ -4,4 +4,170 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: "Poppins";
+}
+
+.reservations {
+	background-color: #fff;
+	max-width: 1700px;
+	margin: 2rem auto;
+	border-radius: 3px;
+	user-select: none;
+}
+
+.buttons {
+	display: flex;
+}
+
+.buttons > div {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	border: 1px solid #eee;
+	padding: 0.5rem 0.5rem;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.inner {
+	display: flex;
+	border-top: 1px solid #eee;
+}
+
+.month {
+	display: flex;
+	flex-direction: column;
+}
+
+.monthName {
+	overflow: hidden;
+	height: 40px;
+	border-right: 1px solid #eee;
+	line-height: 2;
+}
+
+.monthName > span {
+	padding: 0.5rem 0.5rem 0.5rem 1rem;
+	display: block;
+}
+
+.dates {
+	display: flex;
+}
+
+.date {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0.5rem 0rem;
+	border: 1px solid #eee;
+	border-right: none;
+}
+
+.date:first-child {
+	border-left: none;
+}
+
+.date:last-child {
+	border-right: 1px solid #eee;
+}
+
+.dateText {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.dayText {
+	font-size: 12px;
+}
+
+.num {
+	color: #fff;
+	width: 30px;
+	text-align: center;
+	border-radius: 3px;
+	font-size: 14px;
+	pointer-events: none;
+}
+
+.num_green {
+	background-color: #59b59d;
+}
+
+.num_red {
+	background-color: #ea6565;
+}
+
+.num_active {
+	border-right: 1px solid #333;
+	border-left: 1px solid #333;
+}
+
+.activeDate {
+	background-color: #333;
+	border: none;
+	color: #fff;
+}
+
+.activeDate_bordered {
+	border: 1px solid #333;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+
+.weekend {
+	background-color: #eee;
+	border: 1px solid #ddd !important;
+	border-right: none;
+}
+
+.weekend_bordered {
+	background-color: #eee;
+	border: 1px solid #ddd;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #ddd;
+}
+
+.disabled {
+	cursor: no-drop !important;
+	opacity: 0.3;
+}
+
+.row {
+	display: flex;
+	width: 100%;
+	background-color: #fff;
+}
+
+.row_left {
+	min-width: 170px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	padding: 1rem 1rem 0.4rem 1rem;
+}
+
+.row_left_bordered {
+	min-width: 170px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	padding: 1rem 1rem 0.4rem 1rem;
+	border: 1px solid #eee;
+}
+
+.row:last-child > .row_left_bordered {
+	border-bottom: 1px solid #eee !important;
+}
+
+.row_right {
+	width: 100%;
+	display: flex;
+	min-height: 40px;
+	overflow: hidden;
+}
+
+.date_hovered {
+	background-color: #e3f5fc;
 }

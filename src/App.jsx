@@ -1,9 +1,10 @@
+import { Reservations } from "./components/Reservations/Reservations";
 import "./App.css";
 
 function App() {
 	return (
 		<div>
-			<h1>Hello worid</h1>
+			<Reservations />
 		</div>
 	);
 }
