@@ -1,126 +1,47 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { AiFillCaretDown } from "react-icons/ai";
-import { MdDragIndicator } from "react-icons/md";
+import { connect } from "react-redux";
 import { RoomTypeExpand } from "../RoomTypeExpand/RoomTypeExpand";
+import { TypeHeader } from "./TypeHeader";
+import { TypeRoomCount } from "./TypeRoomCount";
 
-export function RoomTypeRow({
-	room,
-	dates,
-	currentSingleDateWidth,
-	index,
-	expand,
-	hoveredIndex,
-	setHoveredIndex,
-}) {
-	const [height, setHeight] = useState(0);
-	const [hovered, setHovered] = useState(false);
-	const [toggleState, setToggle] = useState(expand);
-	const contentRef = useRef(null);
+const mapStateToProps = (state) => ({
+	expandAll: state.reservations.expandAll,
+});
 
-	function toggleHover(e) {
-		setHoveredIndex(e.target.dataset.index);
+export const RoomTypeRow = connect(mapStateToProps)(
+	({ room, index, expandAll }) => {
+		const [toggleState, setToggle] = useState();
 
-		setHovered((curr) => (curr ? false : true));
+		useEffect(() => {
+			setToggle(expandAll);
+		}, [expandAll]);
 
-		if (e.type === "mouseout") {
-			setHoveredIndex();
-		}
+		return (
+			<Draggable draggableId={room.id} index={index} key={room.id}>
+				{(provided) => (
+					<>
+						<div ref={provided.innerRef} {...provided.draggableProps}>
+							<TypeHeader
+								handleProps={provided.dragHandleProps}
+								setToggle={setToggle}
+								toggle={toggleState}
+								room={room}
+							/>
+							<TypeRoomCount />
+							<RoomTypeExpand room={room} toggle={toggleState} />
+						</div>
+					</>
+				)}
+			</Draggable>
+		);
 	}
+);
 
-	return (
-		<Draggable draggableId={room.id} index={index} key={room.id}>
-			{(provided) => (
-				<div ref={provided.innerRef} {...provided.draggableProps}>
-					<div className="row">
-						<div
-							className="row_left_bordered"
-							style={{ borderBottom: "none" }}
-							{...provided.dragHandleProps}
-						>
-							<span
-								style={{
-									fontWeight: "bold",
-									display: "flex",
-									alignItems: "center",
-								}}
-							>
-								<MdDragIndicator color="#888" />
-								{room.roomType}
-							</span>
-							<div onClick={() => setToggle((curr) => !curr)}>
-								<AiFillCaretDown
-									color="#33A1FD"
-									style={{
-										transform: `rotate(${height !== 0 ? "-180" : "0"}deg)`,
-										transition: ".3s all ease-in-out",
-									}}
-								/>
-							</div>
-						</div>
-						<div className="row_right">
-							{dates.map((date) =>
-								date.dates.map((el, i) => (
-									<div
-										data-index={i}
-										onMouseEnter={toggleHover}
-										onMouseOut={toggleHover}
-										className={`date ${i === +hoveredIndex && "date_hovered"} ${
-											el.activeDate && "activeDate_bordered"
-										} ${
-											(el.day === "Sat" || el.day === "Sun") &&
-											"weekend_bordered"
-										}`}
-										style={{
-											width: `${currentSingleDateWidth}px`,
-											borderBottom: "none",
-										}}
-									>
-										<span className={`num num_green`}>20</span>
-									</div>
-								))
-							)}
-						</div>
-					</div>
-					<div className="row">
-						<div
-							className="row_left_bordered"
-							style={{ borderTop: "none", borderBottom: "none" }}
-						></div>
-						<div className="row_right">
-							{dates.map((date) =>
-								date.dates.map((el, i) => (
-									<div
-										data-index={i}
-										onMouseEnter={toggleHover}
-										onMouseOut={toggleHover}
-										className={`date ${i === +hoveredIndex && "date_hovered"} ${
-											hovered && "date_hovered"
-										} ${el.activeDate && "activeDate_bordered"} ${
-											(el.day === "Sat" || el.day === "Sun") &&
-											"weekend_bordered"
-										}`}
-										style={{
-											width: `${currentSingleDateWidth}px`,
-											borderTop: "none",
-										}}
-									></div>
-								))
-							)}
-						</div>
-					</div>
-					<RoomTypeExpand
-						room={room}
-						currentSingleDateWidth={currentSingleDateWidth}
-						dates={dates}
-						hoveredIndex={hoveredIndex}
-						setHoveredIndex={setHoveredIndex}
-						toggleHover={toggleHover}
-						expand={expand}
-						toggle={toggleState}
-					/>
-				</div>
-			)}
-		</Draggable>
-	);
-}
+// ${
+// 	pI == hoveredIndex.parentIndex &&
+// 	i == hoveredIndex.index &&
+// 	"date_hovered"
+// }
+
+// ${hovered && "date_hovered"}

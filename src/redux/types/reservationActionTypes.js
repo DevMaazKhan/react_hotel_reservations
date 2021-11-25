@@ -1,0 +1,10 @@
+export const APP_INIT = "APP_INIT";
+export const SET_DATES = "SET_DATES";
+export const SET_SINGLE_DATE_WIDTH = "SET_SINGLE_DATE_WIDTH";
+export const PREV_DATE = "PREV_DATE";
+export const NEXT_DATE = "NEXT_DATE";
+export const TODAY_DATE = "TODAY_DATE";
+export const ZOOM_IN = "ZOOM_IN";
+export const ZOOM_OUT = "ZOOM_OUT";
+export const SET_HOVERINDEX = "SET_HOVERINDEX";
+export const SET_EXPAND_ALL = "SET_EXPAND_ALL";

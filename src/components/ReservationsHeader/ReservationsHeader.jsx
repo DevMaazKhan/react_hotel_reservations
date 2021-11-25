@@ -1,43 +1,49 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useContainerDimensions } from "../../hooks/useCurrentDimenssions";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import moment from "moment";
+import React, { memo } from "react";
+import { AiFillCaretDown } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../redux";
+import { Dates } from "./Dates/Dates";
 
-export function ReservationsHeader({ dates, currentSingleDateWidth }) {
-	return (
-		<>
-			<div className="inner">
-				{dates.map((date) => (
-					<div className="month">
-						<div
-							className="monthName"
+const mapStateToProps = (state) => {
+	const { expandAll } = state.reservations;
+	return {
+		expandAll,
+	};
+};
+
+export const ReservationsHeader = connect(mapStateToProps)(
+	memo(({ expandAll }) => {
+		const dispatch = useDispatch();
+		const { setExpandAll } = bindActionCreators(actionCreators, dispatch);
+
+		return (
+			<div className="row">
+				<div
+					className="row_left_bordered"
+					style={{
+						padding: "1rem 1rem .4rem 1rem",
+						alignItems: "flex-end",
+					}}
+				>
+					<span style={{ fontWeight: "bold" }}>Rooms</span>
+					<div onClick={setExpandAll}>
+						<AiFillCaretDown
+							color="#33A1FD"
 							style={{
-								width: `calc(${
-									currentSingleDateWidth * date.dates.length
-								} + 1.5rem)`,
+								cursor: "pointer",
+								transition: ".3s all ease-in-out",
+								transform: `rotate(${expandAll ? "0" : "180"}deg)`,
 							}}
-						>
-							<span>{date.monthName}</span>
-						</div>
-						<div className="dates">
-							{date.dates.map((el) => (
-								<div
-									className={`date ${el.activeDate && "activeDate"} ${
-										(el.day === "Sat" || el.day === "Sun") && "weekend"
-									}`}
-									style={{ width: `${currentSingleDateWidth}px` }}
-								>
-									<span className="dateText">{el.date}</span>
-									<span className="dayText">{el.day}</span>
-								</div>
-							))}
-						</div>
+						/>
 					</div>
-				))}
+				</div>
+				<Dates />
 			</div>
-		</>
-	);
-}
+		);
+	})
+);
 
 // [
 // 	{

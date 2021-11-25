@@ -3,8 +3,8 @@ export const room1Data = [
 		_id: 1,
 		id: "booking-1",
 		name: "Dov Andrasch",
-		startsAt: "1/3/2022",
-		endsAt: "1/7/2022",
+		startsAt: "11/08/2021",
+		endsAt: "11/15/2021",
 		status: "Confirmed",
 	},
 	{

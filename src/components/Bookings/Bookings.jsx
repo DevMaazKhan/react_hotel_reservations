@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 
-export function Bookings({ roomBookings }) {
-	useEffect(() => {
-		console.log("roomBookings");
-	}, []);
+export const Bookings = memo(({ roomBookings }) => {
 	return <div></div>;
-}
+});

@@ -1,50 +1,27 @@
 import moment from "moment";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Bookings } from "../Bookings/Bookings";
+import { Box } from "../utils/Box";
 
-export function RoomBookings({
-	currentSingleDateWidth,
-	dates,
-	setHoveredIndex,
-	hoveredIndex,
-	roomBookings,
-}) {
-	const [hovered, setHovered] = useState(false);
+const mapStateToProps = (state, ownProps) => {
+	const { currentSingleDateWidth, dates } = state.reservations;
+	const { roomBookings } = ownProps;
+	return {
+		roomBookings,
+		currentSingleDateWidth,
+		dates,
+	};
+};
 
-	function toggleHover(e) {
-		setHoveredIndex(e.target.dataset.index);
-		setHovered((curr) => (curr ? false : true));
+export const RoomBookings = connect(mapStateToProps)(
+	({ roomBookings, dates }) => {
+		const [hovered, setHovered] = useState(false);
 
-		if (e.type === "mouseout") {
-			setHoveredIndex();
+		function toggleHover(e) {
+			setHovered((curr) => (curr ? false : true));
 		}
-	}
 
-	return (
-		<div className={`row_right`}>
-			{dates.map((date) =>
-				date.dates.map((el, i) => {
-					return (
-						<div
-							data-index={i}
-							onMouseEnter={toggleHover}
-							onMouseOut={toggleHover}
-							className={`date ${i === +hoveredIndex && "date_hovered"} ${
-								hovered && "date_hovered"
-							} ${el.activeDate && "activeDate_bordered"} ${
-								(el.day === "Sat" || el.day === "Sun") && "weekend_bordered"
-							}`}
-							style={{
-								width: `${currentSingleDateWidth}px`,
-								borderTop: "none",
-								position: "relative",
-							}}
-						>
-							<Bookings roomBookings={roomBookings} />
-						</div>
-					);
-				})
-			)}
-		</div>
-	);
-}
+		return <div></div>;
+	}
+);

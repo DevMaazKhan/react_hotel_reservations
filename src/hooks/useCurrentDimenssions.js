@@ -8,7 +8,6 @@ export const useContainerDimensions = (myRef) => {
 	const [dimensions, setDimensions] = useState({ width: 0 });
 
 	useEffect(() => {
-		console.log();
 		const handleResize = () => {
 			setDimensions(getDimensions());
 		};

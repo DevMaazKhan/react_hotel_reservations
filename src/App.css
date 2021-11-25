@@ -15,6 +15,13 @@
 	user-select: none;
 }
 
+.reservation_actions {
+	margin-bottom: 0.5rem;
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-end;
+}
+
 .buttons {
 	display: flex;
 }
@@ -31,12 +38,15 @@
 
 .inner {
 	display: flex;
+	width: 100%;
 	border-top: 1px solid #eee;
 }
 
 .month {
 	display: flex;
 	flex-direction: column;
+	/* width: 100%; */
+	/* overflow: hidden; */
 }
 
 .monthName {
@@ -52,7 +62,9 @@
 }
 
 .dates {
+	width: 100%;
 	display: flex;
+	overflow: hidden;
 }
 
 .date {
@@ -138,6 +150,7 @@
 	display: flex;
 	width: 100%;
 	background-color: #fff;
+	min-height: 50px;
 }
 
 .row_left {
@@ -151,9 +164,9 @@
 .row_left_bordered {
 	min-width: 170px;
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	justify-content: space-between;
-	padding: 1rem 1rem 0.4rem 1rem;
+	/* padding: 1rem 1rem 0.4rem 1rem; */
 	border: 1px solid #eee;
 }
 
@@ -170,4 +183,94 @@
 
 .date_hovered {
 	background-color: #e3f5fc;
+}
+
+.hovered {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.booking {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 0rem 1rem;
+	position: relative;
+	border: none;
+}
+
+.booking::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgb(179, 222, 219);
+	width: 4px;
+	height: 100%;
+}
+
+.booking::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-image: linear-gradient(to right, transparent, currentColor);
+	width: 30px;
+	height: 100%;
+}
+
+.room_dropdown_options {
+	position: absolute;
+	width: 160px;
+	z-index: 200;
+	background-color: #fff;
+	height: auto;
+	top: 35px;
+	left: 140px;
+	border-radius: 5px;
+	box-shadow: 10px 8px 5px -15px rgba(0, 0, 0, 0.75),
+		-10px -8px 7px -15px rgba(0, 0, 0, 0.75);
+}
+
+.room_dropdown_option {
+	padding: 0.8rem 1rem;
+	text-align: left;
+	transition: 0.1s all ease-in-out;
+	font-size: 12px;
+	font-weight: light;
+}
+
+.room_dropdown_option:first-child {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.room_dropdown_option:last-child {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.room_dropdown_option:hover {
+	background-color: #eee;
+}
+
+.room_number_text {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-weight: normal;
+	width: 100%;
+	height: 100%;
+	padding: 0rem 1rem;
+	transition: 0.1s all ease-in-out;
+	cursor: pointer;
+}
+
+.room_number_text:hover {
+	background-color: #eee;
 }
